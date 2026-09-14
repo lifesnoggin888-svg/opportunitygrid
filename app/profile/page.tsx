@@ -56,7 +56,7 @@ export default function ProfilePage() {
         (see the About page). Nothing here is sent anywhere.
       </p>
 
-      <form onSubmit={handleSubmit} className="mt-10 grid max-w-2xl gap-6">
+      <form onSubmit={handleSubmit} className="og-card mt-10 grid max-w-2xl gap-6 p-8 md:p-10">
         <Field label="Business name">
           <input
             required
