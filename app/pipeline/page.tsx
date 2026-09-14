@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DEMO_OPPORTUNITIES } from "@/lib/data/demo-opportunities";
 import { loadPipeline } from "@/lib/store";
+import { useOpportunities } from "@/lib/useOpportunities";
 import type { ApplicationStage, TrackedApplication } from "@/lib/types";
 
 const STAGE_ORDER: ApplicationStage[] = ["discovered", "qualified", "preparing", "submitted", "won", "lost", "expired"];
 
 export default function PipelinePage() {
   const [pipeline, setPipeline] = useState<TrackedApplication[]>([]);
+  const { opportunities } = useOpportunities();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration-safe read from localStorage, unavailable during SSR
@@ -44,7 +45,7 @@ export default function PipelinePage() {
                 </p>
                 <ul className="mt-3 space-y-2">
                   {items.map((item) => {
-                    const opp = DEMO_OPPORTUNITIES.find((o) => o.id === item.opportunityId);
+                    const opp = opportunities.find((o) => o.id === item.opportunityId);
                     return (
                       <li key={item.opportunityId}>
                         <Link

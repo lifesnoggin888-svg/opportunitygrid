@@ -2,17 +2,18 @@
 
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
-import { DEMO_OPPORTUNITIES } from "@/lib/data/demo-opportunities";
 import { assessEligibility } from "@/lib/matching";
 import { buildReadinessChecklist } from "@/lib/readiness";
 import { loadPipeline, loadProfile, savePipeline, upsertPipelineStage } from "@/lib/store";
+import { useOpportunities } from "@/lib/useOpportunities";
 import type { ApplicationStage, OrganizationProfile } from "@/lib/types";
 
 const STAGES: ApplicationStage[] = ["discovered", "qualified", "preparing", "submitted", "won", "lost", "expired"];
 
 export default function OpportunityDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const opportunity = DEMO_OPPORTUNITIES.find((o) => o.id === id);
+  const { opportunities, liveStatus } = useOpportunities();
+  const opportunity = opportunities.find((o) => o.id === id);
   const [profile, setProfile] = useState<OrganizationProfile | null>(null);
   const [stage, setStage] = useState<ApplicationStage>("discovered");
 
@@ -27,7 +28,9 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
   if (!opportunity) {
     return (
       <section className="og-container py-16">
-        <p className="text-sm text-[var(--color-muted)]">Opportunity not found.</p>
+        <p className="text-sm text-[var(--color-muted)]">
+          {liveStatus === "loading" ? "Loading…" : "Opportunity not found."}
+        </p>
         <Link href="/opportunities" className="mt-4 inline-block text-sm text-[var(--color-gold)] underline">
           &larr; Back to opportunities
         </Link>
@@ -82,9 +85,13 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
               Source: {opportunity.source_name} ({opportunity.source_type}) &middot; Confidence:{" "}
               {opportunity.confidence} &middot; Retrieved: {new Date(opportunity.retrieved_at).toLocaleDateString()}
             </p>
-            {opportunity.is_demo && (
+            {opportunity.is_demo ? (
               <p className="mt-2 text-xs text-[var(--color-gold)]">
                 Demonstration record — this issuer and its details are fictional.
+              </p>
+            ) : (
+              <p className="mt-2 text-xs text-[var(--color-good)]">
+                Live record — real Nigerian government procurement data, not a demo fixture.
               </p>
             )}
           </div>

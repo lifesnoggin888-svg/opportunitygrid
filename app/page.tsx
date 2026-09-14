@@ -38,7 +38,7 @@ export default function HomePage() {
                 href="/opportunities"
                 className="inline-flex items-center justify-center rounded-sm border border-[var(--color-ink)] px-6 py-3 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-paper-dim)]"
               >
-                Browse demo opportunities
+                Browse opportunities
               </Link>
             </div>
           </div>
@@ -48,9 +48,9 @@ export default function HomePage() {
                 Current mode
               </p>
               <p className="mt-2 text-sm leading-relaxed text-[var(--color-ink)]">
-                DEMO_MODE — all opportunities shown are fictional, hand-authored records used to
-                demonstrate the matching, readiness, and tracking pipeline before live African
-                source integrations ship.
+                Live procurement data from Nigeria&apos;s Bureau of Public Procurement, alongside
+                clearly labeled demonstration records for opportunity classes not yet
+                source-integrated. Nothing is ever presented as live when it is not.
               </p>
             </div>
           </div>

@@ -18,26 +18,29 @@ export default function AboutPage() {
 
       <div className="mt-8 max-w-2xl space-y-6 text-sm leading-relaxed text-[var(--color-muted)]">
         <p>
-          OpportunityGrid is RoyalGrid Technologies&apos; flagship platform. This build
-          demonstrates the full discover-verify-match-qualify-prepare-track pipeline end to
-          end, running against a fixed set of clearly labeled demonstration opportunities
-          rather than live African sources.
+          OpportunityGrid is RoyalGrid Technologies&apos; flagship platform. This build runs
+          the full discover-verify-match-qualify-prepare-track pipeline end to end against two
+          kinds of data, always visibly labeled: a fixed set of clearly fictional demonstration
+          opportunities, and one real, live African source.
         </p>
         <p>
-          <span className="font-medium text-[var(--color-ink)]">Why DEMO_MODE first:</span>{" "}
-          the matching, readiness, and pipeline-tracking logic needs to work correctly before
-          it is worth connecting to real, rate-limited, and terms-of-use-constrained African
-          data sources. Every demo opportunity&apos;s issuer name is fictional and marked
-          &quot;(Demonstration Program)&quot; so it cannot be mistaken for a real institution.
+          <span className="font-medium text-[var(--color-ink)]">What is real and live today:</span>{" "}
+          the &quot;Live&quot;-tagged procurement opportunities on the Opportunities page are
+          genuine, current Nigerian government tenders — fetched directly from the Bureau of
+          Public Procurement&apos;s official open-contracting data (published under the Open
+          Contracting Data Standard). No API key, no scraping: it is bulk open government data,
+          fetched from its official publisher on every page load. Every field OpportunityGrid
+          cannot verify from that data — an eligibility summary, a document requirement — is
+          left null rather than guessed, exactly as it is for demo records.
         </p>
         <p>
-          <span className="font-medium text-[var(--color-ink)]">What is real:</span> the
-          source-adapter architecture (<code>lib/adapters/</code>) is built to the same
-          interface a live source will use, and a first live adapter — scoped web search over
-          Nigerian sources via SerpApi — is implemented and activates automatically once a
-          <code>SERPAPI_KEY</code> is configured on the server. Every result it returns keeps
-          its real, verifiable source URL; fields it cannot verify (issuer, deadline, funding
-          amount) are left null rather than guessed.
+          <span className="font-medium text-[var(--color-ink)]">Why demo data still exists
+          alongside it:</span> Nigeria&apos;s official procurement feed does not (yet) cover
+          grants, accelerators, export programs, or the other opportunity classes RoyalGrid
+          intends to support — those remain clearly labeled demonstration records until a real
+          source for each is integrated. The source-adapter architecture (
+          <code>lib/adapters/</code>) is built so each new class plugs in behind the same
+          interface as procurement did.
         </p>
         <p>
           <span className="font-medium text-[var(--color-ink)]">What is not yet built:</span>{" "}

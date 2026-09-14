@@ -7,7 +7,7 @@ export default function SiteFooter() {
           OpportunityGrid is RoyalGrid Technologies&apos; flagship platform. &copy; {year} RoyalGrid
           Technologies.
         </p>
-        <p>Currently running in DEMO_MODE.</p>
+        <p>Live procurement data + demonstration records for other opportunity classes.</p>
       </div>
     </footer>
   );
