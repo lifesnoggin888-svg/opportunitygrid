@@ -12,20 +12,20 @@ export default function HomePage() {
       >
         <div className="og-container relative grid gap-10 py-16 md:grid-cols-12 md:py-24">
           <div className="md:col-span-8">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
+            <p className="og-reveal og-reveal-1 text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
               OpportunityGrid
             </p>
-            <h1 className="font-serif mt-5 text-4xl leading-[1.1] text-[var(--color-ink)] md:text-5xl">
+            <h1 className="og-reveal og-reveal-2 font-serif mt-5 text-4xl leading-[1.1] text-[var(--color-ink)] md:text-5xl">
               <span className="og-metallic">Know</span> what you qualify for, and what it
               takes to act.
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-muted)]">
+            <p className="og-reveal og-reveal-3 mt-6 max-w-xl text-base leading-relaxed text-[var(--color-muted)]">
               OpportunityGrid discovers, verifies, and matches African businesses to the
               funding, procurement, accelerator, and development-finance opportunities they
               actually qualify for — then tracks the path from discovery to a submitted
               application.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="og-reveal og-reveal-4 mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/profile" className="og-btn-primary">
                 Build your business profile
               </Link>
@@ -37,7 +37,7 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="md:col-span-4">
+          <div className="og-reveal og-reveal-4 md:col-span-4">
             <div className="og-glass og-hud-frame p-6">
               <div className="flex items-center gap-2">
                 <span className="og-ping relative inline-block h-2 w-2 rounded-full bg-[#4ade80]" />
