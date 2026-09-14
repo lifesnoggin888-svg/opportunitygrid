@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <section className="og-container py-16">
-      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-gold)]">
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
         About this build
       </p>
       <h1 className="font-serif mt-3 max-w-2xl text-2xl text-[var(--color-ink)] md:text-3xl">
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
       <Link
         href="/opportunities"
-        className="mt-10 inline-flex items-center justify-center rounded-sm bg-[var(--color-ink)] px-6 py-3 text-sm font-medium text-[var(--color-paper)] hover:bg-[var(--color-ink-soft)]"
+        className="og-btn-primary mt-10"
       >
         Try the demo opportunities
       </Link>

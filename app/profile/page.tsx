@@ -45,7 +45,7 @@ export default function ProfilePage() {
 
   return (
     <section className="og-container py-16">
-      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-gold)]">
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
         Business profile
       </p>
       <h1 className="font-serif mt-3 text-2xl text-[var(--color-ink)] md:text-3xl">
@@ -177,7 +177,7 @@ export default function ProfilePage() {
         <div className="flex items-center gap-4 pt-2">
           <button
             type="submit"
-            className="inline-flex items-center justify-center rounded-sm bg-[var(--color-ink)] px-6 py-3 text-sm font-medium text-[var(--color-paper)] hover:bg-[var(--color-ink-soft)]"
+            className="og-btn-primary"
           >
             Save profile
           </button>

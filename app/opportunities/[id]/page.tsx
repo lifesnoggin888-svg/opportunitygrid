@@ -31,7 +31,7 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
         <p className="text-sm text-[var(--color-muted)]">
           {liveStatus === "loading" ? "Loading…" : "Opportunity not found."}
         </p>
-        <Link href="/opportunities" className="mt-4 inline-block text-sm text-[var(--color-gold)] underline">
+        <Link href="/opportunities" className="mt-4 inline-block text-sm text-[var(--color-purple-soft)] underline">
           &larr; Back to opportunities
         </Link>
       </section>
@@ -49,11 +49,11 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
 
   return (
     <section className="og-container py-16">
-      <Link href="/opportunities" className="text-sm text-[var(--color-gold)] underline">
+      <Link href="/opportunities" className="text-sm text-[var(--color-purple-soft)] underline">
         &larr; Back to opportunities
       </Link>
 
-      <p className="mt-6 text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-gold)]">
+      <p className="mt-6 text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
         {opportunity.opportunity_type.replace(/_/g, " ")}
       </p>
       <h1 className="font-serif mt-2 text-2xl text-[var(--color-ink)] md:text-3xl">{opportunity.title}</h1>
@@ -79,14 +79,14 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
             />
           </dl>
 
-          <div className="mt-8 rounded-sm border border-[var(--color-line)] bg-[var(--color-paper-dim)] p-5">
+          <div className="og-card mt-8 p-5">
             <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-muted)]">Provenance</p>
             <p className="mt-2 text-sm text-[var(--color-ink)]">
               Source: {opportunity.source_name} ({opportunity.source_type}) &middot; Confidence:{" "}
               {opportunity.confidence} &middot; Retrieved: {new Date(opportunity.retrieved_at).toLocaleDateString()}
             </p>
             {opportunity.is_demo ? (
-              <p className="mt-2 text-xs text-[var(--color-gold)]">
+              <p className="mt-2 text-xs text-[var(--color-purple-soft)]">
                 Demonstration record — this issuer and its details are fictional.
               </p>
             ) : (
@@ -129,7 +129,7 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
 
           {!profile && (
             <p className="mt-8 text-sm text-[var(--color-muted)]">
-              <Link href="/profile" className="text-[var(--color-gold)] underline">
+              <Link href="/profile" className="text-[var(--color-purple-soft)] underline">
                 Build your business profile
               </Link>{" "}
               to see a fit assessment and readiness checklist here.
@@ -138,7 +138,7 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
         </div>
 
         <div>
-          <div className="rounded-sm border border-[var(--color-line)] p-5">
+          <div className="og-card p-5">
             <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-muted)]">
               Application pipeline stage
             </p>
@@ -155,7 +155,7 @@ export default function OpportunityDetailPage({ params }: { params: Promise<{ id
             </select>
             <p className="mt-3 text-xs text-[var(--color-muted)]">
               Saved to this browser only. See it alongside every other tracked opportunity on{" "}
-              <Link href="/pipeline" className="text-[var(--color-gold)] underline">
+              <Link href="/pipeline" className="text-[var(--color-purple-soft)] underline">
                 your pipeline
               </Link>
               .

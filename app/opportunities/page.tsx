@@ -41,7 +41,7 @@ export default function OpportunitiesPage() {
 
   return (
     <section className="og-container py-16">
-      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-gold)]">
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
         Opportunities
       </p>
       <h1 className="font-serif mt-3 text-2xl text-[var(--color-ink)] md:text-3xl">
@@ -49,7 +49,7 @@ export default function OpportunitiesPage() {
       </h1>
       {!profile && (
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--color-muted)]">
-          <Link href="/profile" className="text-[var(--color-gold)] underline">
+          <Link href="/profile" className="text-[var(--color-purple-soft)] underline">
             Build your business profile
           </Link>{" "}
           to see a fit assessment against each opportunity below.
@@ -68,11 +68,16 @@ export default function OpportunitiesPage() {
             <button
               key={t}
               onClick={() => setTypeFilter(t)}
-              className={`rounded-full border px-3 py-1.5 text-xs ${
+              className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
                 typeFilter === t
-                  ? "border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                  : "border-[var(--color-line)] text-[var(--color-ink)]"
+                  ? "border-transparent text-white"
+                  : "border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-purple-soft)]"
               }`}
+              style={
+                typeFilter === t
+                  ? { background: "linear-gradient(120deg, var(--color-purple-deep), var(--color-purple), var(--color-purple-soft))" }
+                  : undefined
+              }
             >
               {t === "all" ? "All" : t.replace(/_/g, " ")}
             </button>
@@ -87,7 +92,7 @@ export default function OpportunitiesPage() {
             <Link
               key={opp.id}
               href={`/opportunities/${opp.id}`}
-              className="flex flex-col gap-3 rounded-sm border border-[var(--color-line)] bg-[var(--color-paper)] p-6 transition-colors hover:border-[var(--color-gold)] sm:flex-row sm:items-center sm:justify-between"
+              className="og-card flex flex-col gap-3 p-6 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
                 <div className="flex flex-wrap items-center gap-2">

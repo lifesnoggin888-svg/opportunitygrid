@@ -19,7 +19,7 @@ export default function PipelinePage() {
 
   return (
     <section className="og-container py-16">
-      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-gold)]">
+      <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-purple-soft)]">
         Pipeline
       </p>
       <h1 className="font-serif mt-3 text-2xl text-[var(--color-ink)] md:text-3xl">
@@ -29,7 +29,7 @@ export default function PipelinePage() {
       {pipeline.length === 0 ? (
         <p className="mt-6 text-sm text-[var(--color-muted)]">
           Nothing tracked yet.{" "}
-          <Link href="/opportunities" className="text-[var(--color-gold)] underline">
+          <Link href="/opportunities" className="text-[var(--color-purple-soft)] underline">
             Browse opportunities
           </Link>{" "}
           and set a stage from any detail page.
@@ -39,7 +39,7 @@ export default function PipelinePage() {
           {STAGE_ORDER.map((stage) => {
             const items = pipeline.filter((p) => p.stage === stage);
             return (
-              <div key={stage} className="bg-[var(--color-paper)] p-4">
+              <div key={stage} className="og-card p-4">
                 <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-muted)]">
                   {stage} ({items.length})
                 </p>
@@ -50,7 +50,7 @@ export default function PipelinePage() {
                       <li key={item.opportunityId}>
                         <Link
                           href={`/opportunities/${item.opportunityId}`}
-                          className="text-sm text-[var(--color-ink)] hover:text-[var(--color-gold)]"
+                          className="text-sm text-[var(--color-ink)] hover:text-[var(--color-purple)]"
                         >
                           {opp?.title ?? item.opportunityId}
                         </Link>
