@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import DemoBanner from "@/components/DemoBanner";
+import ClickSound from "@/components/ClickSound";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
+        <ClickSound />
         <DemoBanner />
         <SiteHeader />
         <main className="flex-1">{children}</main>

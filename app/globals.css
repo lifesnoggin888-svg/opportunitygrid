@@ -3,14 +3,14 @@
 :root {
   --color-ink: #0a0612;
   --color-ink-soft: #170f28;
-  --color-paper: #faf9fc;
-  --color-paper-dim: #efebf6;
-  --color-line: #ded6ee;
+  --color-paper: #f3f0ec;
+  --color-paper-dim: #e8e3dc;
+  --color-line: #d8d1c8;
   --color-purple: #3d1a78;
   --color-purple-deep: #1a0c38;
-  --color-purple-soft: #7b4fe0;
-  --color-gold: #c9a24a;
-  --color-gold-soft: #e6c874;
+  --color-purple-soft: #6a5490;
+  --color-gold: #b3924f;
+  --color-gold-soft: #c7ad76;
   --color-clay: #7a3b2e;
   --color-muted: #5c5570;
   --color-muted-on-dark: #bcb2d6;
@@ -92,7 +92,7 @@ body {
 .og-royal-section {
   position: relative;
   overflow: hidden;
-  background: radial-gradient(1100px 520px at 12% -10%, rgba(123, 79, 224, 0.35), transparent),
+  background: radial-gradient(1100px 520px at 12% -10%, rgba(106, 84, 144, 0.35), transparent),
     radial-gradient(800px 420px at 100% 0%, rgba(201, 162, 74, 0.22), transparent),
     linear-gradient(160deg, var(--color-purple-deep) 0%, var(--color-ink) 70%);
   color: var(--color-paper);
@@ -139,7 +139,7 @@ body {
     180deg,
     transparent,
     rgba(230, 200, 116, 0.16) 45%,
-    rgba(123, 79, 224, 0.22) 55%,
+    rgba(106, 84, 144, 0.22) 55%,
     transparent
   );
   animation: og-scan 7s linear infinite;
@@ -170,12 +170,30 @@ body {
 
 .og-glass {
   position: relative;
-  border-radius: 0.375rem;
-  border: 1px solid rgba(201, 162, 74, 0.4);
-  background: linear-gradient(160deg, rgba(123, 79, 224, 0.14), rgba(10, 6, 18, 0.55));
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 0 1px rgba(230, 200, 116, 0.08), 0 20px 60px -20px rgba(123, 79, 224, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(230, 200, 116, 0.5);
+  background: linear-gradient(160deg, rgba(106, 84, 144, 0.22), rgba(10, 6, 18, 0.62));
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow:
+    0 0 0 1px rgba(230, 200, 116, 0.12),
+    0 1px 0 0 rgba(255, 255, 255, 0.18) inset,
+    0 24px 60px -20px rgba(106, 84, 144, 0.55),
+    0 4px 16px -6px rgba(0, 0, 0, 0.4);
+}
+
+.og-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.02) 22%,
+    transparent 40%
+  );
+  pointer-events: none;
 }
 
 .og-hud-frame {

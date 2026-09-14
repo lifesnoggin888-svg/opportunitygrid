@@ -7,7 +7,7 @@ export default function HomePage() {
         className="relative overflow-hidden border-b border-[var(--color-line)]"
         style={{
           background:
-            "radial-gradient(1200px 480px at 15% -10%, rgba(123,79,224,0.16), transparent), radial-gradient(900px 400px at 100% 0%, rgba(201,162,74,0.14), transparent), var(--color-paper)",
+            "radial-gradient(1200px 480px at 15% -10%, rgba(106,84,144,0.16), transparent), radial-gradient(900px 400px at 100% 0%, rgba(201,162,74,0.14), transparent), var(--color-paper)",
         }}
       >
         <div className="og-container relative grid gap-10 py-16 md:grid-cols-12 md:py-24">
