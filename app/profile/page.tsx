@@ -3,6 +3,8 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { loadProfile, saveProfile } from "@/lib/store";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { getMyOrganizationId, loadRemoteProfile, saveRemoteProfile } from "@/lib/supabase/profileRepo";
 import type { OrganizationProfile } from "@/lib/types";
 
 const DEFAULT_PROFILE: OrganizationProfile = {
@@ -23,13 +25,37 @@ const DEFAULT_PROFILE: OrganizationProfile = {
 
 export default function ProfilePage() {
   const router = useRouter();
+  const supabase = createSupabaseBrowserClient();
   const [profile, setProfile] = useState<OrganizationProfile>(DEFAULT_PROFILE);
   const [saved, setSaved] = useState(false);
+  const [organizationId, setOrganizationId] = useState<string | null>(null);
+  const [remoteReady, setRemoteReady] = useState(false);
 
   useEffect(() => {
-    const existing = loadProfile();
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration-safe read from localStorage, unavailable during SSR
-    if (existing) setProfile(existing);
+    let cancelled = false;
+    async function hydrate() {
+      if (supabase) {
+        const orgId = await getMyOrganizationId(supabase);
+        if (cancelled) return;
+        if (orgId) {
+          setOrganizationId(orgId);
+          const remote = await loadRemoteProfile(supabase, orgId);
+          if (!cancelled) {
+            if (remote) setProfile(remote);
+            setRemoteReady(true);
+          }
+          return;
+        }
+      }
+      const existing = loadProfile();
+      if (!cancelled && existing) setProfile(existing);
+      if (!cancelled) setRemoteReady(true);
+    }
+    hydrate();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-time hydration on mount
   }, []);
 
   function update<K extends keyof OrganizationProfile>(key: K, value: OrganizationProfile[K]) {
@@ -37,9 +63,13 @@ export default function ProfilePage() {
     setSaved(false);
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    saveProfile(profile);
+    if (supabase && organizationId) {
+      await saveRemoteProfile(supabase, organizationId, profile);
+    } else {
+      saveProfile(profile);
+    }
     setSaved(true);
   }
 
@@ -52,10 +82,22 @@ export default function ProfilePage() {
         Only attributes relevant to eligibility.
       </h1>
       <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--color-muted)]">
-        Stored only in this browser for now — OpportunityGrid does not yet have a live backend
-        (see the About page). Nothing here is sent anywhere.
+        {organizationId ? (
+          "Saved to your account — persists across devices."
+        ) : (
+          <>
+            Stored only in this browser for now.{" "}
+            <a href="/login" className="underline">
+              Create an account
+            </a>{" "}
+            to save it to your organization instead.
+          </>
+        )}
       </p>
 
+      {!remoteReady ? (
+        <p className="mt-10 text-sm text-[var(--color-muted)]">Loading…</p>
+      ) : (
       <form onSubmit={handleSubmit} className="og-card mt-10 grid max-w-2xl gap-6 p-8 md:p-10">
         <Field label="Business name">
           <input
@@ -188,6 +230,7 @@ export default function ProfilePage() {
           )}
         </div>
       </form>
+      )}
     </section>
   );
 }
