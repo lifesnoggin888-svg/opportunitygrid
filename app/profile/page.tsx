@@ -28,6 +28,7 @@ export default function ProfilePage() {
   const supabase = createSupabaseBrowserClient();
   const [profile, setProfile] = useState<OrganizationProfile>(DEFAULT_PROFILE);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [organizationId, setOrganizationId] = useState<string | null>(null);
   const [remoteReady, setRemoteReady] = useState(false);
 
@@ -65,12 +66,18 @@ export default function ProfilePage() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (supabase && organizationId) {
-      await saveRemoteProfile(supabase, organizationId, profile);
-    } else {
-      saveProfile(profile);
+    setSaveError(null);
+    try {
+      if (supabase && organizationId) {
+        await saveRemoteProfile(supabase, organizationId, profile);
+      } else {
+        saveProfile(profile);
+      }
+      setSaved(true);
+    } catch (err) {
+      setSaved(false);
+      setSaveError(err instanceof Error ? err.message : "Could not save your profile. Please try again.");
     }
-    setSaved(true);
   }
 
   return (
@@ -228,6 +235,7 @@ export default function ProfilePage() {
               Saved. <button type="button" onClick={() => router.push("/opportunities")} className="underline">See your matches &rarr;</button>
             </span>
           )}
+          {saveError && <span className="text-sm text-red-600">{saveError}</span>}
         </div>
       </form>
       )}

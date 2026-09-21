@@ -59,8 +59,10 @@ export async function loadRemoteProfile(supabase: SupabaseClient, organizationId
 }
 
 export async function saveRemoteProfile(supabase: SupabaseClient, organizationId: string, profile: OrganizationProfile): Promise<void> {
-  await Promise.all([
+  const [orgResult, profileResult] = await Promise.all([
     supabase.from("organizations").update({ name: profile.name, country: profile.country }).eq("id", organizationId),
     supabase.from("organization_profiles").upsert(toRow(organizationId, profile), { onConflict: "organization_id" }),
   ]);
+  if (orgResult.error) throw orgResult.error;
+  if (profileResult.error) throw profileResult.error;
 }
